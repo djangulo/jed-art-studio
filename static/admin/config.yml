@@ -29,7 +29,7 @@ collections:
   - name: 'pages'
     label: 'Pages'
     files:
-      - file: 'src/pages/landing-page/en/index.md'
+      - file: 'src/pages/index.en.md'
         label: 'Landing Page (English)'
         name: 'index'
         fields:
@@ -114,7 +114,7 @@ collections:
                   },
                 ],
             }
-      - file: 'src/pages/landing-page/es/index.md'
+      - file: 'src/pages/index.es.md'
         label: 'Landing Page (Spanish)'
         name: 'index'
         fields:
