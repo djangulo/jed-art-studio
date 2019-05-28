@@ -5,6 +5,11 @@ backend:
 media_folder: static/img
 public_folder: /img
 
+media_library:
+  name: uploadcare
+  config:
+    publicKey: 5429a01c0d6f3fa25741
+
 collections:
   - name: 'blog'
     label: 'Blog'
@@ -31,7 +36,7 @@ collections:
     files:
       - file: 'src/pages/index.en.md'
         label: 'Landing Page (English)'
-        name: 'index'
+        name: 'index-en'
         fields:
           - {
               label: 'Template Key',
@@ -116,13 +121,13 @@ collections:
             }
       - file: 'src/pages/index.es.md'
         label: 'Landing Page (Spanish)'
-        name: 'index'
+        name: 'index-es'
         fields:
           - {
               label: 'Template Key',
               name: 'templateKey',
               widget: 'hidden',
-              default: 'index-page.es',
+              default: 'index-page',
             }
           - { label: 'Título', name: title, widget: string }
           - { label: 'Imágen', name: image, widget: image }

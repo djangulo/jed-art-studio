@@ -4,4 +4,9 @@
   functions = "lambda"
 [build.environment]
   YARN_VERSION = "1.16.0"
+  NODE_VERSION = "12.2.0"
   YARN_FLAGS = "--no-ignore-optional"
+
+[[redirects]]
+  from = "/"
+  to = "/en/"
