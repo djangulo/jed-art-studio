@@ -9,84 +9,90 @@ media_library:
   name: uploadcare
   config:
     publicKey: 5429a01c0d6f3fa25741
-    imageShrink: '800x600'
+    imageShrink: "800x600"
 
 collections:
-  - name: 'blog-en'
-    label: 'Blog in english'
-    folder: 'src/pages/blog'
-    filter: { field: 'language', value: 'en' }
+  - name: "blog-en"
+    label: "Blog in english"
+    folder: "src/pages/blog"
+    filter: { field: "language", value: "en" }
     create: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     fields:
       - {
-          label: 'Template Key',
-          name: 'templateKey',
-          widget: 'hidden',
-          default: 'blog-post',
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "blog-post",
         }
       - {
-          label: 'Language',
-          name: 'language',
-          widget: 'select',
-          options: ['en', 'es'],
+          label: "Language",
+          name: "language",
+          widget: "select",
+          options: ["en", "es"],
         }
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Description', name: 'description', widget: 'text' }
-      - { label: 'Featured Post', name: 'featuredpost', widget: 'boolean' }
-      - { label: 'Featured Image', name: 'featuredimage', widget: image }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
-      - { label: 'Tags', name: 'tags', widget: 'list' }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
+      - { label: "Featured Image", name: "featuredimage", widget: image }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list" }
 
-  - name: 'blog-es'
-    label: 'Blog en español'
-    folder: 'src/pages/blog'
-    filter: { field: 'language', value: 'es' }
+  - name: "blog-es"
+    label: "Blog en español"
+    folder: "src/pages/blog"
+    filter: { field: "language", value: "es" }
     create: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     fields:
       - {
-          label: 'Template Key',
-          name: 'templateKey',
-          widget: 'hidden',
-          default: 'blog-post',
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "blog-post",
         }
       - {
-          label: 'Language',
-          name: 'language',
-          widget: 'select',
-          options: ['en', 'es'],
+          label: "Language",
+          name: "language",
+          widget: "select",
+          options: ["en", "es"],
         }
-      - { label: 'Título', name: 'title', widget: 'string' }
-      - { label: 'Fecha de publicación', name: 'date', widget: 'datetime' }
-      - { label: 'Descripción', name: 'description', widget: 'text' }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha de publicación", name: "date", widget: "datetime" }
+      - { label: "Descripción", name: "description", widget: "text" }
       - {
-          label: 'Publicación destacada',
-          name: 'featuredpost',
-          widget: 'boolean',
+          label: "Publicación destacada",
+          name: "featuredpost",
+          widget: "boolean",
         }
-      - { label: 'Imágen destacada', name: 'featuredimage', widget: image }
-      - { label: 'Cuerpo', name: 'body', widget: 'markdown' }
-      - { label: 'Tags', name: 'tags', widget: 'list' }
+      - { label: "Imágen destacada", name: "featuredimage", widget: image }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list" }
 
-  - name: 'pages'
-    label: 'Pages'
+  - name: "pages"
+    label: "Pages"
     files:
-      - file: 'src/pages/index.en.md'
-        label: 'Landing Page (English)'
-        name: 'index_en'
+      - file: "src/pages/index.en.md"
+        label: "Landing Page (English)"
+        name: "index-en"
         fields:
           - {
-              label: 'Template Key',
-              name: 'templateKey',
-              widget: 'hidden',
-              default: 'index-page',
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "index-page",
             }
-          - { label: 'Title', name: title, widget: string }
-          - { label: 'Image', name: image, widget: image }
-          - { label: 'Heading', name: heading, widget: string }
-          - { label: 'Subheading', name: subheading, widget: string }
+          - {
+              label: "Language",
+              name: "language",
+              widget: "hidden",
+              default: "en",
+            }
+          - { label: "Title", name: title, widget: string }
+          - { label: "Image", name: image, widget: image }
+          - { label: "Heading", name: heading, widget: string }
+          - { label: "Subheading", name: subheading, widget: string }
           - {
               label: Mainpitch,
               name: mainpitch,
@@ -158,112 +164,142 @@ collections:
                   },
                 ],
             }
-      - file: 'src/pages/index.es.md'
-        label: 'Landing Page (Spanish)'
-        name: 'index_es'
+      - file: "src/pages/index.es.md"
+        label: "Landing Page (Spanish)"
+        name: "index-es"
         fields:
           - {
-              label: 'Template Key',
-              name: 'templateKey',
-              widget: 'hidden',
-              default: 'index-page',
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "index-page",
             }
-          - { label: 'Título', name: title, widget: string }
-          - { label: 'Imágen', name: image, widget: image }
-          - { label: 'Cabecera', name: heading, widget: string }
-          - { label: 'Sub-cabecera', name: subheading, widget: string }
           - {
-              label: 'Campo principal',
+              label: "Language",
+              name: "language",
+              widget: "hidden",
+              default: "es",
+            }
+          - { label: "Título", name: title, widget: string }
+          - { label: "Imágen", name: image, widget: image }
+          - { label: "Cabecera", name: heading, widget: string }
+          - { label: "Sub-cabecera", name: subheading, widget: string }
+          - {
+              label: "Campo principal",
               name: mainpitch,
               widget: object,
               fields:
                 [
-                  { label: 'Título', name: title, widget: string },
-                  { label: 'Descripción', name: description, widget: text },
+                  { label: "Título", name: title, widget: string },
+                  { label: "Descripción", name: description, widget: text },
                 ],
             }
-          - { label: 'Descripción', name: description, widget: string }
+          - { label: "Descripción", name: description, widget: string }
           - {
-              label: 'Introducción',
+              label: "Introducción",
               name: intro,
               widget: object,
               fields:
                 [
-                  { label: 'Cabecera', name: heading, widget: string },
-                  { label: 'Descripción', name: description, widget: text },
+                  { label: "Cabecera", name: heading, widget: string },
+                  { label: "Descripción", name: description, widget: text },
                   {
-                    label: 'Promociones',
+                    label: "Promociones",
                     name: blurbs,
                     widget: list,
                     fields:
                       [
-                        { label: 'Imágen', name: image, widget: image },
-                        { label: 'Texto', name: text, widget: text },
+                        { label: "Imágen", name: image, widget: image },
+                        { label: "Texto", name: text, widget: text },
                       ],
                   },
                 ],
             }
           - {
-              label: 'Principal',
+              label: "Principal",
               name: main,
               widget: object,
               fields:
                 [
-                  { label: 'Cabecera', name: heading, widget: string },
-                  { label: 'Descripción', name: description, widget: text },
+                  { label: "Cabecera", name: heading, widget: string },
+                  { label: "Descripción", name: description, widget: text },
                   {
-                    label: '1ra imágen',
+                    label: "1ra imágen",
                     name: image1,
                     widget: object,
                     fields:
                       [
-                        { label: 'Imágen', name: image, widget: image },
+                        { label: "Imágen", name: image, widget: image },
                         { label: Alt, name: alt, widget: string },
                       ],
                   },
                   {
-                    label: '2da imágen',
+                    label: "2da imágen",
                     name: image2,
                     widget: object,
                     fields:
                       [
-                        { label: 'Imágen', name: image, widget: image },
+                        { label: "Imágen", name: image, widget: image },
                         { label: Alt, name: alt, widget: string },
                       ],
                   },
                   {
-                    label: '3ra imágen',
+                    label: "3ra imágen",
                     name: image3,
                     widget: object,
                     fields:
                       [
-                        { label: 'Imágen', name: image, widget: image },
+                        { label: "Imágen", name: image, widget: image },
                         { label: Alt, name: alt, widget: string },
                       ],
                   },
                 ],
             }
-      - file: 'src/pages/about/index.md'
-        label: 'About'
-        name: 'about'
+      - file: "src/pages/about/index.en.md"
+        label: "About (English)"
+        name: "about-en"
         fields:
           - {
-              label: 'Template Key',
-              name: 'templateKey',
-              widget: 'hidden',
-              default: 'about-page',
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "about-page",
             }
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
-      - file: 'src/pages/products/index.md'
-        label: 'Products Page'
-        name: 'products'
+          - {
+              label: "Language",
+              name: "language",
+              widget: "hidden",
+              default: "en",
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+      - file: "src/pages/about/index.es.md"
+        label: "About (Spanish)"
+        name: "about-es"
         fields:
           - {
-              label: 'Template Key',
-              name: 'templateKey',
-              widget: 'hidden',
-              default: 'product-page',
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "about-page",
+            }
+          - {
+              label: "Language",
+              name: "language",
+              widget: "hidden",
+              default: "es",
+            }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Cuerpo", name: "body", widget: "markdown" }
+      - file: "src/pages/products/index.md"
+        label: "Products Page"
+        name: "products"
+        fields:
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "product-page",
             }
           - { label: Title, name: title, widget: string }
           - { label: Image, name: image, widget: image }
