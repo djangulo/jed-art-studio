@@ -80,6 +80,7 @@ module.exports = {
         langKeyDefault: 'en',
         useLangKeyLayout: false,
         prefixDefault: true,
+        pagesPaths: ['/src/pages/', '/src/pages/blog/'],
         markdownRemark: {
           postPage: 'src/templates/blog-post.js',
           query: `
@@ -88,7 +89,6 @@ module.exports = {
                 edges {
                   node {
                     fields {
-                      slug
                       langKey
                     }
                   }

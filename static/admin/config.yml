@@ -9,19 +9,27 @@ media_library:
   name: uploadcare
   config:
     publicKey: 5429a01c0d6f3fa25741
+    imageShrink: '800x600'
 
 collections:
-  - name: 'blog'
-    label: 'Blog'
+  - name: 'blog-en'
+    label: 'Blog in english'
     folder: 'src/pages/blog'
+    filter: { field: 'language', value: 'en' }
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{slug}}'
     fields:
       - {
           label: 'Template Key',
           name: 'templateKey',
           widget: 'hidden',
           default: 'blog-post',
+        }
+      - {
+          label: 'Language',
+          name: 'language',
+          widget: 'select',
+          options: ['en', 'es'],
         }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
@@ -31,12 +39,43 @@ collections:
       - { label: 'Body', name: 'body', widget: 'markdown' }
       - { label: 'Tags', name: 'tags', widget: 'list' }
 
+  - name: 'blog-es'
+    label: 'Blog en español'
+    folder: 'src/pages/blog'
+    filter: { field: 'language', value: 'es' }
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {
+          label: 'Template Key',
+          name: 'templateKey',
+          widget: 'hidden',
+          default: 'blog-post',
+        }
+      - {
+          label: 'Language',
+          name: 'language',
+          widget: 'select',
+          options: ['en', 'es'],
+        }
+      - { label: 'Título', name: 'title', widget: 'string' }
+      - { label: 'Fecha de publicación', name: 'date', widget: 'datetime' }
+      - { label: 'Descripción', name: 'description', widget: 'text' }
+      - {
+          label: 'Publicación destacada',
+          name: 'featuredpost',
+          widget: 'boolean',
+        }
+      - { label: 'Imágen destacada', name: 'featuredimage', widget: image }
+      - { label: 'Cuerpo', name: 'body', widget: 'markdown' }
+      - { label: 'Tags', name: 'tags', widget: 'list' }
+
   - name: 'pages'
     label: 'Pages'
     files:
       - file: 'src/pages/index.en.md'
         label: 'Landing Page (English)'
-        name: 'index-en'
+        name: 'index_en'
         fields:
           - {
               label: 'Template Key',
@@ -121,7 +160,7 @@ collections:
             }
       - file: 'src/pages/index.es.md'
         label: 'Landing Page (Spanish)'
-        name: 'index-es'
+        name: 'index_es'
         fields:
           - {
               label: 'Template Key',
