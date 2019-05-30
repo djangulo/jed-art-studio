@@ -16,6 +16,8 @@ collections:
     label: "Blog in english"
     folder: "src/pages/blog"
     filter: { field: "language", value: "en" }
+    extension: ".en.md"
+    format: "frontmatter"
     create: true
     slug: "{{slug}}"
     fields:
@@ -25,16 +27,17 @@ collections:
           widget: "hidden",
           default: "blog-post",
         }
-      - {
-          label: "Language",
-          name: "language",
-          widget: "select",
-          options: ["en", "es"],
-        }
+      - { label: "Language", name: "language", widget: "hidden", default: "en" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
+      - {
+          label: "Spanish version",
+          name: "langSwitch",
+          widget: "string",
+          required: false,
+        }
       - { label: "Featured Image", name: "featuredimage", widget: image }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list" }
@@ -43,6 +46,8 @@ collections:
     label: "Blog en español"
     folder: "src/pages/blog"
     filter: { field: "language", value: "es" }
+    extension: ".es.md"
+    format: "frontmatter"
     create: true
     slug: "{{slug}}"
     fields:
@@ -52,12 +57,7 @@ collections:
           widget: "hidden",
           default: "blog-post",
         }
-      - {
-          label: "Language",
-          name: "language",
-          widget: "select",
-          options: ["en", "es"],
-        }
+      - { label: "Lenguaje", name: "language", widget: "hidden", default: "es" }
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha de publicación", name: "date", widget: "datetime" }
       - { label: "Descripción", name: "description", widget: "text" }
@@ -65,6 +65,12 @@ collections:
           label: "Publicación destacada",
           name: "featuredpost",
           widget: "boolean",
+        }
+      - {
+          label: "Versión en inglés",
+          name: "langSwitch",
+          widget: "string",
+          required: false,
         }
       - { label: "Imágen destacada", name: "featuredimage", widget: image }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
@@ -258,6 +264,7 @@ collections:
       - file: "src/pages/about/index.en.md"
         label: "About (English)"
         name: "about-en"
+        slug: "{{title}}"
         fields:
           - {
               label: "Template Key",
@@ -276,6 +283,7 @@ collections:
       - file: "src/pages/about/index.es.md"
         label: "About (Spanish)"
         name: "about-es"
+        slug: "{{title}}"
         fields:
           - {
               label: "Template Key",
@@ -291,6 +299,7 @@ collections:
             }
           - { label: "Título", name: "title", widget: "string" }
           - { label: "Cuerpo", name: "body", widget: "markdown" }
+
       - file: "src/pages/products/index.md"
         label: "Products Page"
         name: "products"

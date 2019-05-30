@@ -1,9 +1,9 @@
-const _kebabCase = require('lodash/kebabCase');
-const _get = require('lodash/get');
-const _uniq = require('lodash/uniq');
-const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const _kebabCase = require("lodash/kebabCase");
+const _get = require("lodash/get");
+const _uniq = require("lodash/uniq");
+const path = require("path");
+const { createFilePath } = require("gatsby-source-filesystem");
+const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -16,10 +16,12 @@ exports.createPages = ({ actions, graphql }) => {
             id
             fields {
               slug
+              langKey
             }
             frontmatter {
               tags
               templateKey
+              language
             }
           }
         }
@@ -43,7 +45,8 @@ exports.createPages = ({ actions, graphql }) => {
         ),
         // additional data can be passed via context
         context: {
-          id
+          id,
+          language: edge.node.frontmatter.language
         }
       });
     });
@@ -74,19 +77,37 @@ exports.createPages = ({ actions, graphql }) => {
   });
 };
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   fmImagesToRelative(node); // convert image paths for gatsby images
 
   if (node.internal.type === `MarkdownRemark`) {
-    if (node.id === 'db15dc94-db86-5d9e-8ebf-76abef8eb5d1') {
-      console.log(JSON.stringify(node, null, 2));
-    }
-    const value = createFilePath({ node, getNode });
-    // createNodeField({
-    //   name: `slug`,
-    //   node,
-    //   value
-    // });
-  }
+    // there has to be a better way
+  //   const langKey = node.fields.langKey;
+  //   const templateKey = node.frontmatter.templateKey;
+  //   const data = await graphql(`
+  //   {
+  //     allMarkdownRemark(
+  //       filter: {
+  //         fields: {langKey: {ne: ${langKey}}},
+  //         frontmatter: {templateKey: {eq: ${templateKey}}}
+  //       }
+  //     ) {
+  //       edges {
+  //         node {
+  //           id
+  //           fields {
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
+  //   createNodeField({
+  //     name: `translatedSlug`,
+  //     node,
+  //     data.edges[0].node.fields.slug
+  //   });
+  // }
 };

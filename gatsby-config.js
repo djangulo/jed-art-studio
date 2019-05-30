@@ -77,9 +77,9 @@ module.exports = {
     {
       resolve: "gatsby-plugin-i18n",
       options: {
-        langKeyDefault: "en",
+        langKeyDefault: "es",
         useLangKeyLayout: false,
-        prefixDefault: true,
+        prefixDefault: false,
         pagesPaths: ["/src/pages/", "/src/pages/blog/"],
         markdownRemark: {
           postPage: "src/templates/blog-post.js",
