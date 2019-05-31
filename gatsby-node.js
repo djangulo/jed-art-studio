@@ -1,9 +1,9 @@
-const _kebabCase = require("lodash/kebabCase");
-const _get = require("lodash/get");
-const _uniq = require("lodash/uniq");
-const path = require("path");
-const { createFilePath } = require("gatsby-source-filesystem");
-const { fmImagesToRelative } = require("gatsby-remark-relative-images");
+const _kebabCase = require('lodash/kebabCase');
+const _get = require('lodash/get');
+const _uniq = require('lodash/uniq');
+const path = require('path');
+const { createFilePath } = require('gatsby-source-filesystem');
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -46,7 +46,8 @@ exports.createPages = ({ actions, graphql }) => {
         // additional data can be passed via context
         context: {
           id,
-          language: edge.node.frontmatter.language
+          language: edge.node.frontmatter.language,
+          templateKey: edge.node.frontmatter.templateKey
         }
       });
     });
@@ -77,37 +78,36 @@ exports.createPages = ({ actions, graphql }) => {
   });
 };
 
-exports.onCreateNode = async ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
+exports.onCreateNode = async ({ node }) => {
   fmImagesToRelative(node); // convert image paths for gatsby images
+};
 
-  if (node.internal.type === `MarkdownRemark`) {
-    // there has to be a better way
-  //   const langKey = node.fields.langKey;
-  //   const templateKey = node.frontmatter.templateKey;
-  //   const data = await graphql(`
-  //   {
-  //     allMarkdownRemark(
-  //       filter: {
-  //         fields: {langKey: {ne: ${langKey}}},
-  //         frontmatter: {templateKey: {eq: ${templateKey}}}
-  //       }
-  //     ) {
-  //       edges {
-  //         node {
-  //           id
-  //           fields {
-  //             slug
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
-  //   createNodeField({
-  //     name: `translatedSlug`,
-  //     node,
-  //     data.edges[0].node.fields.slug
-  //   });
-  // }
+exports.sourceNodes = ({ actions, getNodes }) => {
+  const { createNodeField } = actions;
+  const allNodes = getNodes();
+
+  allNodes.forEach(async node => {
+    if (node.internal.type === `MarkdownRemark`) {
+      const sisterNode = allNodes.find(
+        n =>
+          n.fields &&
+          n.fields.langKey !== node.fields.langKey &&
+          n.frontmatter &&
+          n.frontmatter.templateKey === node.frontmatter.templateKey
+      );
+      if (sisterNode && sisterNode.fields && sisterNode.fields.slug) {
+        createNodeField({
+          name: `translatedSlug`,
+          node,
+          value: sisterNode.fields.slug
+        });
+        console.log(node.fields.slug + ' -> ' + sisterNode.fields.slug);
+      } else {
+        console.log(sisterNode);
+      }
+      // console.log(node.frontmatter.templateKey);
+      // console.log(node.fields);
+      // console.log(sisterNodes);
+    }
+  });
 };
