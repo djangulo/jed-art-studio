@@ -1,9 +1,9 @@
-const _kebabCase = require('lodash/kebabCase');
-const _get = require('lodash/get');
-const _uniq = require('lodash/uniq');
-const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const _kebabCase = require("lodash/kebabCase");
+const _get = require("lodash/get");
+const _uniq = require("lodash/uniq");
+const path = require("path");
+const { createFilePath } = require("gatsby-source-filesystem");
+const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -88,22 +88,33 @@ exports.sourceNodes = ({ actions, getNodes }) => {
 
   allNodes.forEach(async node => {
     if (node.internal.type === `MarkdownRemark`) {
-      const sisterNode = allNodes.find(
-        n =>
-          n.fields &&
-          n.fields.langKey !== node.fields.langKey &&
-          n.frontmatter &&
-          n.frontmatter.templateKey === node.frontmatter.templateKey
-      );
-      if (sisterNode && sisterNode.fields && sisterNode.fields.slug) {
-        createNodeField({
-          name: `translatedSlug`,
-          node,
-          value: sisterNode.fields.slug
-        });
-        console.log(node.fields.slug + ' -> ' + sisterNode.fields.slug);
-      } else {
-        console.log(sisterNode);
+      switch (node.frontmatter.templateKey) {
+        case "blog-post":
+          if (node.frontmatter.translatedSlug)
+            createNodeField({
+              name: `translatedSlug`,
+              node,
+              value: node.frontmatter.translatedSlug
+            });
+          break;
+        default:
+          const sisterNode = allNodes.find(
+            n =>
+              n.fields &&
+              n.fields.langKey !== node.fields.langKey &&
+              n.frontmatter &&
+              n.frontmatter.templateKey === node.frontmatter.templateKey
+          );
+          if (sisterNode && sisterNode.fields && sisterNode.fields.slug) {
+            createNodeField({
+              name: `translatedSlug`,
+              node,
+              value: sisterNode.fields.slug
+            });
+            console.log(node.fields.slug + " -> " + sisterNode.fields.slug);
+          } else {
+            console.log(sisterNode);
+          }
       }
       // console.log(node.frontmatter.templateKey);
       // console.log(node.fields);
