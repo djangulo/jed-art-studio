@@ -1,9 +1,9 @@
-const _kebabCase = require("lodash/kebabCase");
-const _get = require("lodash/get");
-const _uniq = require("lodash/uniq");
-const path = require("path");
-const { createFilePath } = require("gatsby-source-filesystem");
-const { fmImagesToRelative } = require("gatsby-remark-relative-images");
+const _kebabCase = require('lodash/kebabCase');
+const _get = require('lodash/get');
+const _uniq = require('lodash/uniq');
+const path = require('path');
+const { createFilePath } = require('gatsby-source-filesystem');
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -53,23 +53,40 @@ exports.createPages = ({ actions, graphql }) => {
     });
 
     // Tag pages:
-    let tags = [];
+    const tags = { en: [], es: [] };
     // Iterate through each post, putting all found tags into `tags`
     posts.forEach(edge => {
       if (_get(edge, `node.frontmatter.tags`)) {
-        tags = tags.concat(edge.node.frontmatter.tags);
+        switch (edge.node.fields.langKey) {
+          case 'en':
+            tags.en = tags.en.concat(edge.node.frontmatter.tags);
+            break;
+          case 'es':
+          default:
+            tags.es = tags.es.concat(edge.node.frontmatter.tags);
+        }
       }
     });
     // Eliminate duplicate tags
-    tags = _uniq(tags);
+    tags.en = _uniq(tags.en);
+    tags.es = _uniq(tags.es);
 
     // Make tag pages
-    tags.forEach(tag => {
-      const tagPath = `/tags/${_kebabCase(tag)}/`;
-
+    tags.en.forEach(tag => {
+      const tagPath = `/en/tags/${_kebabCase(tag)}/`;
       createPage({
         path: tagPath,
-        component: path.resolve(`src/templates/tags.js`),
+        component: path.resolve(`src/templates/tags.en.js`),
+        context: {
+          tag
+        }
+      });
+    });
+    tags.es.forEach(tag => {
+      const tagPath = `/es/tags/${_kebabCase(tag)}/`;
+      createPage({
+        path: tagPath,
+        component: path.resolve(`src/templates/tags.es.js`),
         context: {
           tag
         }
@@ -88,8 +105,9 @@ exports.sourceNodes = ({ actions, getNodes }) => {
 
   allNodes.forEach(async node => {
     if (node.internal.type === `MarkdownRemark`) {
-      switch (node.frontmatter.templateKey) {
-        case "blog-post":
+      // TODO: remove this horrible split('.')[0]
+      switch (node.frontmatter.templateKey.split('.')[0]) {
+        case 'blog-post':
           if (node.frontmatter.translatedSlug)
             createNodeField({
               name: `translatedSlug`,
@@ -103,7 +121,8 @@ exports.sourceNodes = ({ actions, getNodes }) => {
               n.fields &&
               n.fields.langKey !== node.fields.langKey &&
               n.frontmatter &&
-              n.frontmatter.templateKey === node.frontmatter.templateKey
+              n.frontmatter.templateKey.split('.')[0] ===
+                node.frontmatter.templateKey.split('.')[0]
           );
           if (sisterNode && sisterNode.fields && sisterNode.fields.slug) {
             createNodeField({
@@ -111,7 +130,7 @@ exports.sourceNodes = ({ actions, getNodes }) => {
               node,
               value: sisterNode.fields.slug
             });
-            console.log(node.fields.slug + " -> " + sisterNode.fields.slug);
+            console.log(node.fields.slug + ' -> ' + sisterNode.fields.slug);
           } else {
             console.log(sisterNode);
           }

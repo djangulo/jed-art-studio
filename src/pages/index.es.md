@@ -1,5 +1,5 @@
 ---
-templateKey: index-page
+templateKey: index-page.es
 language: es
 title: Buen cafe con conciencia
 image: /img/home-jumbotron.jpg

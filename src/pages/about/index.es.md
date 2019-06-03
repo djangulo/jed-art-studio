@@ -1,8 +1,8 @@
 ---
-templateKey: "about-page"
-language: "en"
+templateKey: 'about-page.es'
+language: 'es'
 path: /about
-title: About our values
+title: Sobre nosotros
 ---
 
 ### Shade-grown coffee

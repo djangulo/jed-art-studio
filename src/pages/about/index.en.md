@@ -1,6 +1,6 @@
 ---
-templateKey: "about-page"
-language: "en"
+templateKey: 'about-page.en'
+language: 'en'
 path: /about
 title: About our values
 ---

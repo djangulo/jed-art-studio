@@ -1,5 +1,5 @@
 ---
-templateKey: index-page
+templateKey: index-page.en
 language: en
 title: Great coffee with a conscience
 image: /img/home-jumbotron.jpg
