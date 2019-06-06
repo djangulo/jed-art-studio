@@ -1,22 +1,22 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
-import useSiteMetadata from '../components/useSiteMetadata';
-import '../components/all.sass';
+import React from "react";
+import Helmet from "react-helmet";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import useSiteMetadata from "../components/useSiteMetadata";
+import "../components/all.sass";
 
-import 'semantic-ui-css/semantic.min.css';
+import "semantic-ui-css/semantic.min.css";
 
-import { IntlProvider } from 'react-intl';
-import 'intl';
-import { Location } from '@reach/router';
+import { IntlProvider } from "react-intl";
+import "intl";
+import { Location } from "@reach/router";
 import {
   getLangs,
   getUrlForLang,
   getCurrentLangKey,
   isHomePage
-} from 'ptz-i18n';
-import useI18nPluginData from '../components/useI18nPluginData';
+} from "ptz-i18n";
+import useI18nPluginData from "../components/useI18nPluginData";
 
 const TemplateWrapper = ({ children, i18nMessages, location }) => {
   const url = location.pathname;
@@ -31,8 +31,13 @@ const TemplateWrapper = ({ children, i18nMessages, location }) => {
   } = useSiteMetadata();
   const langKey = getCurrentLangKey(langs, defaultLangKey, url);
 
-  const homeLink = prefixDefault ? `/${langKeyDefault}` : `/`;
-  const langsMenu = getLangs(langs, langKey, getUrlForLang(homeLink, url));
+  const homeLink = prefixDefault ? `/${langKeyDefault}/` : `/`;
+  const langsMenu = getLangs(
+    langs,
+    langKey,
+    getUrlForLang(homeLink, url, langKey)
+  );
+  console.log(url, JSON.stringify(langsMenu, null, 2));
 
   return (
     <IntlProvider locale={langKey} messages={i18nMessages}>
@@ -40,37 +45,37 @@ const TemplateWrapper = ({ children, i18nMessages, location }) => {
         <Helmet>
           <html lang={langKey} />
           <title>{title}</title>
-          <meta name="description" content={description} />
+          <meta name='description' content={description} />
 
           <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/img/apple-touch-icon.png"
+            rel='apple-touch-icon'
+            sizes='180x180'
+            href='/img/apple-touch-icon.png'
           />
           <link
-            rel="icon"
-            type="image/png"
-            href="/img/favicon-32x32.png"
-            sizes="32x32"
+            rel='icon'
+            type='image/png'
+            href='/img/favicon-32x32.png'
+            sizes='32x32'
           />
           <link
-            rel="icon"
-            type="image/png"
-            href="/img/favicon-16x16.png"
-            sizes="16x16"
+            rel='icon'
+            type='image/png'
+            href='/img/favicon-16x16.png'
+            sizes='16x16'
           />
 
           <link
-            rel="mask-icon"
-            href="/img/safari-pinned-tab.svg"
-            color="#ff4400"
+            rel='mask-icon'
+            href='/img/safari-pinned-tab.svg'
+            color='#ff4400'
           />
-          <meta name="theme-color" content="#fff" />
+          <meta name='theme-color' content='#fff' />
 
-          <meta property="og:type" content="business.business" />
-          <meta property="og:title" content={title} />
-          <meta property="og:url" content="/" />
-          <meta property="og:image" content="/img/og-image.jpg" />
+          <meta property='og:type' content='business.business' />
+          <meta property='og:title' content={title} />
+          <meta property='og:url' content='/' />
+          <meta property='og:image' content='/img/og-image.jpg' />
         </Helmet>
         <Navbar
           isHome={isHome}

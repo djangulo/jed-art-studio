@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Flag } from 'semantic-ui-react';
-import styled from '@emotion/styled';
-import { Link } from 'gatsby';
+import React from "react";
+import PropTypes from "prop-types";
+import { Flag } from "semantic-ui-react";
+import styled from "@emotion/styled";
+import { Link } from "gatsby";
 
 const Nav = styled.nav``;
 
@@ -12,10 +12,10 @@ const Li = styled.li``;
 
 const getIcon = langKey => {
   switch (langKey) {
-    case 'en':
-      return <Flag name="us" />;
-    case 'es':
-      return <Flag name="do" />;
+    case "en":
+      return <Flag name='us' />;
+    case "es":
+      return <Flag name='do' />;
     default:
       return null;
   }
