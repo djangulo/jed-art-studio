@@ -55,10 +55,10 @@ CMS.registerEditorComponent({
   // Function to extract data elements from the regexp match
   fromBlock: match =>
     match && {
-      videoId: match[4],
-      startAt: match[8] ? parseInt(match[8], 10) : 0,
-      showControls: match[5] ? true : false,
-      privacyMode: match[2] ? true : false
+      videoId: match[3],
+      startAt: match[7] ? parseInt(match[8], 10) : 0,
+      showControls: match[4] ? true : false,
+      privacyMode: match[1] ? true : false
     },
   // Function to create a text block from an instance of this component
   toBlock: function(obj) {
