@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 
 const YoutubeEmbed = styled(
-  ({ videoId, startAt, privacyMode, showControls }) => {
+  ({ videoId, startAt, privacyMode, showControls, title }) => {
     let videoUrl = privacyMode
       ? `https://youtube-nocookie.com/embed/${videoId}`
       : `https://youtube.com/embed/${videoId}`;
-    if (!showControls || startAt !== 0) videoUrl += "?";
+    if (!showControls || startAt !== 0) videoUrl += '?';
     if (!showControls && startAt !== 0) {
       videoUrl += `controls=0&amp;start=${startAt}`;
     } else if (!showControls && startAt === 0) {
@@ -18,11 +18,12 @@ const YoutubeEmbed = styled(
 
     return (
       <iframe
-        width='600'
-        height='550'
+        title={title}
+        width="600"
+        height="550"
         src={videoUrl}
-        frameborder='0'
-        allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       />
     );
